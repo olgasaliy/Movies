@@ -14,10 +14,10 @@ public class Movie {
     var title: String
     var releaseDate: Date
     var posterPath: String?
-    var rating: Float?
+    var rating: NSNumber?
     var overview: String
 
-    init(id: Int, title: String, releaseDate: Date, posterPath: String?, rating: Float?, overview: String) {
+    init(id: Int, title: String, releaseDate: Date, posterPath: String?, rating: NSNumber?, overview: String) {
         self.id = id
         self.title = title
         self.releaseDate = releaseDate
@@ -26,12 +26,12 @@ public class Movie {
         self.overview = overview
     }
     
-    convenience init(_ attributes: Dictionary<String, AnyObject>) {
+    convenience init(_ attributes: [String : Any]) {
         let id = attributes["id"] as! Int
         let title = attributes["title"] as! String
         let releaseDate = attributes["release_date"] as! String
         let posterPath = attributes["poster_path"] as? String
-        let rating = attributes["vote_average"] as? Float
+        let rating = attributes["vote_average"] as? NSNumber
         let overview = attributes["overview"] as! String
         
         self.init(id: id,

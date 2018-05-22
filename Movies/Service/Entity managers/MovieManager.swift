@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 public class MovieManager {
     
@@ -24,10 +25,19 @@ public class MovieManager {
     
     func getListOfMovies(byQuery query:String, completionHandler: @escaping (Array<Movie>?, Error?) -> Void) {
         //TEMP
-        let tempQuery = "best"
-        
-        service.getSearchMovie(byQuery: tempQuery) { data, error in
-            
+        service.getSearchMovie(byQuery: query) { data, error in
+            if let unwrappedError = error {
+                
+            } else {
+                var array:Array<Movie> = Array()
+                if let unwrappedData = data {
+                    let json = JSON(unwrappedData)
+                    for (index, subJSON) : (String, JSON) in json["results"] {
+                        array.append(Movie.init(subJSON.dictionaryObject!))
+                    }
+                    
+                }
+            }
         }
         
     }

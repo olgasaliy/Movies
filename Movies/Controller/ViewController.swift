@@ -12,6 +12,9 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        MovieManager.shared.getListOfMovies(byQuery: "best") { (array, error) in
+            print(array)
+        }
         // Do any additional setup after loading the view, typically from a nib.
     }
 

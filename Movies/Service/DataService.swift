@@ -19,28 +19,28 @@ enum posterSizes: String {
 public class DataService{
 
     let sessionManager: SessionManager
-    let baseURL: URL
+    let baseURL: String
     var imageBaseURL: URL?
     
     var apiKey: (name: String, key: String)
     
-    init(withBaseUrl url: URL, apiKey: String) {
+    init(withBaseUrl url: String, apiKey: String) {
         self.sessionManager = SessionManager(configuration: URLSessionConfiguration.default)
         self.baseURL = url
         self.apiKey = ("api_key", apiKey)
     }
     
-    func getSearchMovie(byQuery query: String, completionHanler: @escaping (Data?, Error?) -> Void ) {
+    func getSearchMovie(byQuery query: String, completionHanler: @escaping (Any?, Error?) -> Void ) {
         let path = "\(baseURL)/search/movie/"
         let params = [
             apiKey.name : apiKey.key,
             "query" : query
         ]
         
-        sessionManager.request(path, parameters: params).validate(statusCode: 100..<405).responseData { response in
+        sessionManager.request(path, parameters: params).validate(statusCode: 100..<405).responseJSON { response in
             switch response.result {
             case .success:
-                completionHanler(response.data, nil)
+                completionHanler(response.result.value, nil)
             case .failure(let error):
                 completionHanler(nil, error)
             }

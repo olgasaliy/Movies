@@ -12,7 +12,7 @@ public class DataStore {
     
     // Can't init is singleton
     private init() {
-        dataService = DataService(withBaseUrl:  URL(string: "https://api.themoviedb.org/3"),
+        dataService = DataService(withBaseUrl: "https://api.themoviedb.org/3",
                                   apiKey: "f04e8ed93af390cef2ecddaf78379d66")
     }
     
