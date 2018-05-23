@@ -3,11 +3,13 @@
 
 target 'Movies' do
   pod 'Alamofire'
+  pod 'AlamofireImage'
   pod 'SwiftyJSON'
   use_frameworks!
   
   target 'MoviesTests' do
       pod 'Alamofire'
+      pod 'AlamofireImage'
       pod 'SwiftyJSON'
   end
 
