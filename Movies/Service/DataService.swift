@@ -98,8 +98,8 @@ public class DataService{
     }
     
     func getMovieDetails(by id: Int, completionHanler: @escaping (Any?, Error?) -> Void ) {
-        let path = "\(baseURL)/search/movie"
-        let params = generateParameters(from: ["movie_id" : id])
+        let path = "\(baseURL)/movie/\(id)"
+        let params = generateParameters(from:  [String : String]())
         
         makeJSONRequest(with: path, params, completionHanler)
     }

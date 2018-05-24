@@ -29,9 +29,9 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
                 if result != nil {
                     self.movies = result!
                     self.moviesArray = Array(self.movies.keys)
+                    self.collectionView.reloadSections(IndexSet(integer: 0))
                     self.activityIndicator.isHidden = true
                     self.collectionView.isHidden = false
-                    self.collectionView.reloadSections(IndexSet(integer: 0))
                 }
             }
         }
@@ -41,13 +41,25 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showDetail"{
+            if let detailViewController = segue.destination as? MovieDetailViewController,
+               let indexPath = self.collectionView.indexPathsForSelectedItems?.first {
+                let movie = moviesArray[indexPath.row]
+                detailViewController.movie = (movie: movie, poster: movies[movie] ?? #imageLiteral(resourceName: "not-available"))
+            }
+        }
+    }
+    
+    //MARK: - CollectionView Delegate
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "movieCell", for: indexPath) as! MovieCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "movieListCell", for: indexPath) as! MovieListCell
         let movie = moviesArray[indexPath.row]
         cell.configureCell(image: movies[movie] ?? #imageLiteral(resourceName: "not-available"), title: movie.title)
         return cell
@@ -58,6 +70,51 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
         return CGSize(width: self.collectionView.frame.width / 16 * 7, height: self.collectionView.frame.height / 8 * 4)
     }
     
+    //MARK: - Downloading data
     
+    func searchMovies(by query: String) {
+        collectionView.isHidden = true
+        activityIndicator.isHidden = false
+        
+        MovieManager.shared.getMoviesAndPosters(by: query) { result, error in
+            if let errorUnwrapped = error {
+                print(errorUnwrapped.localizedDescription)
+            } else {
+                if result != nil {
+                    self.movies = result!
+                    self.moviesArray = Array(self.movies.keys)
+                    self.collectionView.reloadSections(IndexSet(integer: 0))
+                    self.activityIndicator.isHidden = true
+                    self.collectionView.isHidden = false
+                }
+            }
+        }
+    }
+}
+
+extension MoviesViewController: UISearchBarDelegate {
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+        searchBar.setShowsCancelButton(false, animated: true)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let text = searchBar.text, text.count > 2 {
+            searchMovies(by: text)
+            searchBar.resignFirstResponder()
+            searchBar.setShowsCancelButton(false, animated: true)
+        }
+    }
+
 }
 

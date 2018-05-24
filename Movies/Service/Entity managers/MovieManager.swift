@@ -20,17 +20,18 @@ public class MovieManager {
     
     let service = DataStore.shared.dataService
     
-    func getMovie(by id: Int, completionHandler: @escaping (Movie?, Error?) -> Void) {
-        service.getMovieDetails(by: id) { data, error in
+    func getMovieDetails(for movie: Movie, completionHandler: @escaping (Movie, Error?) -> Void) {
+        service.getMovieDetails(by: movie.id) { data, error in
             if error != nil {
-                completionHandler(nil, error)
+                completionHandler(movie, error)
             } else {
                 if let unwrappedData = data {
-                    let _ = JSON(unwrappedData)
-                   
-                    
+                    let json = JSON(unwrappedData)
+                    let updatedMovie = movie
+                    updatedMovie.fillAdditionalInfo(json)
+                    completionHandler(updatedMovie, nil)
                 } else {
-                    completionHandler(nil, nil)
+                    completionHandler(movie, nil)
                 }
             }
         }

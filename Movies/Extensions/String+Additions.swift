@@ -14,6 +14,7 @@ extension String {
         get {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
+            dateFormatter.timeZone = TimeZone(identifier: "GMT")
             guard let date = dateFormatter.date(from: self) else {
                 fatalError("ERROR: Date conversion failed due to mismatched format.")
             }

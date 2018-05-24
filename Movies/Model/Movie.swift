@@ -20,16 +20,25 @@ public class Movie: Hashable {
   
     var id: Int
     var title: String
-    var releaseDate: Date
+    var releaseDate: Date?
     var posterPath: String
     var rating: Float
     var overview: String
     
     var budget: Int?
-    var genres: [String]?
+    var genres: String?
     var originalLanguage: String?
 
-    init(id: Int, title: String, releaseDate: Date, posterPath: String, rating: Float, overview: String) {
+    init() {
+        self.id = 0
+        self.title = "Undefined"
+        self.releaseDate = nil
+        self.posterPath = ""
+        self.rating = 0
+        self.overview = ""
+    }
+    
+    init(id: Int, title: String, releaseDate: Date?, posterPath: String, rating: Float, overview: String) {
         self.id = id
         self.title = title
         self.releaseDate = releaseDate
@@ -62,12 +71,28 @@ public class Movie: Hashable {
         let rating = json["vote_average"].floatValue
         let overview = json["overview"].stringValue
         
+        let releaseDateValue = releaseDate != "" ? releaseDate.dateValue : nil
+        
         self.init(id: id,
                   title: title,
-                  releaseDate: releaseDate.dateValue,
+                  releaseDate: releaseDateValue,
                   posterPath: posterPath,
                   rating: rating,
                   overview: overview)
+    }
+    
+    func fillAdditionalInfo(_ json: JSON) {
+        let budget = json["budget"].int
+        var genres = ""
+        json["genres"].arrayValue.forEach { subJson in
+            genres += genres.count > 0 ? ", " : ""
+             genres += "\(subJson["name"].stringValue)"
+        }
+        let originalLanguage = json["original_language"].stringValue
+        
+        self.budget = budget
+        self.genres = genres
+        self.originalLanguage = Languages.shared.dictionary[originalLanguage]
     }
     
 }
