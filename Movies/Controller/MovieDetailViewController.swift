@@ -24,7 +24,7 @@ class MovieDetailViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView(frame: .zero)
-        
+    
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -45,7 +45,8 @@ class MovieDetailViewController: UITableViewController {
             switch typeCell {
             case .movieDetailed:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "movieDetailCell", for: indexPath) as! MovieDetailCell
-                cell.configure(with: movie.poster, description: movie.movie.overview, title: movie.movie.title, liked: false)
+                cell.configure(with: movie.poster, description: movie.movie.genres ?? "Unknown genre", title: movie.movie.title, liked: false)
+                cell.delegate = self
                 return cell
             case .loading:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "loadingCell", for: indexPath) as! LoadingCell
@@ -73,6 +74,14 @@ class MovieDetailViewController: UITableViewController {
             self.isLoading = false
             self.tableView.reloadData()
         }
+    }
+}
+
+extension MovieDetailViewController: MovieDetailCellDelegate {
+    
+    func didTapLike(_ sender: MovieDetailCell) {
+        //add to core data
+        movie.movie.isLiked = true
     }
     
 }

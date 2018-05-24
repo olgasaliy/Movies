@@ -173,6 +173,7 @@
 		49278E3420B4331000A0DB98 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4982277620ADA6CB0035BD3A /* Movies.xcdatamodeld */,
 				4982279220ADA7250035BD3A /* Movie.swift */,
 			);
 			path = Model;
@@ -219,7 +220,6 @@
 				49278E3520B4331D00A0DB98 /* Service */,
 				49278E3420B4331000A0DB98 /* Model */,
 				4982279620ADB5C40035BD3A /* Extensions */,
-				4982277620ADA6CB0035BD3A /* Movies.xcdatamodeld */,
 			);
 			path = Movies;
 			sourceTree = "<group>";

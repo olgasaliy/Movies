@@ -28,6 +28,8 @@ public class Movie: Hashable {
     var budget: Int?
     var genres: String?
     var originalLanguage: String?
+    
+    var isLiked = false
 
     init() {
         self.id = 0
