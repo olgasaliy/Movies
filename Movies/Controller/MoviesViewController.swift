@@ -67,7 +67,7 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.collectionView.frame.width / 16 * 7, height: self.collectionView.frame.height / 8 * 4)
+        return CGSize(width: self.collectionView.frame.width / 16 * 7, height: self.collectionView.frame.height / 7 * 4)
     }
     
     //MARK: - Downloading data

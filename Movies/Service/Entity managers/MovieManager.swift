@@ -54,11 +54,14 @@ public class MovieManager {
                     let group = DispatchGroup()
                     for movie in movies {
                          group.enter()
-                        self?.getPoster(for: movie, size: .medium, completionHandler: { data, _ in
+                        self?.getPoster(for: movie, size: .medium, completionHandler: { data, errorData in
                             if let image = data {
                                 result.updateValue(image, forKey: movie)
                             } else {
                                 result.updateValue(#imageLiteral(resourceName: "not-available"), forKey: movie)
+                                if let errorImage = errorData {
+                                    print(errorImage.localizedDescription)
+                                }
                             }
                             group.leave()
                         })

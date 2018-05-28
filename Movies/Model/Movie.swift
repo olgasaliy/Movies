@@ -49,22 +49,6 @@ public class Movie: Hashable {
         self.overview = overview
     }
     
-    convenience init(_ attributes: [String : Any]) {
-        let id = attributes["id"] as! Int
-        let title = attributes["title"] as! String
-        let releaseDate = attributes["release_date"] as! String
-        let posterPath = attributes["poster_path"] as! String
-        let rating = attributes["vote_average"] as! NSNumber
-        let overview = attributes["overview"] as! String
-        
-        self.init(id: id,
-                  title: title,
-                  releaseDate: releaseDate.dateValue,
-                  posterPath: posterPath,
-                  rating: rating.floatValue,
-                  overview: overview)
-    }
-    
     convenience init(_ json: JSON) {
         let id = json["id"].intValue
         let title = json["title"].stringValue
