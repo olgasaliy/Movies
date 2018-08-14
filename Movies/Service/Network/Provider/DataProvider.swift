@@ -7,3 +7,27 @@
 //
 
 import Foundation
+import ObjectMapper
+import Alamofire
+import AlamofireObjectMapper
+
+class DataProvider {
+    
+    private let sessionManager: SessionManager
+
+    init(_ sessionManager: SessionManager) {
+        self.sessionManager = sessionManager
+    }
+    
+    func execute<T : Mappable>(request: URLRequestConvertible, completion: @escaping (_ response: T?, _ error: Error?) -> ()) {
+        sessionManager.request(request).validate().responseObject { (response: DataResponse<T>) in
+            completion(response.result.value, response.result.error)
+        }
+    }
+    
+    func execute<T : Mappable>(request: URLRequestConvertible, completion: @escaping (_ response: [T]?, _ error: Error?) -> ()) {
+        sessionManager.request(request).validate().responseArray { (response: DataResponse<[T]>) in
+            completion(response.result.value, response.result.error)
+        }
+    }
+}
