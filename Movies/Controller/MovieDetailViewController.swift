@@ -45,7 +45,7 @@ class MovieDetailViewController: UITableViewController {
             switch typeCell {
             case .movieDetailed:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "movieDetailCell", for: indexPath) as! MovieDetailCell
-                cell.configure(with: movie.poster, description: movie.movie.genres ?? "Unknown genre", title: movie.movie.title, liked: false)
+                cell.configure(with: movie.poster, description: movie.movie.genres, title: movie.movie.title, liked: false)
                 cell.delegate = self
                 return cell
             case .loading:

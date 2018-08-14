@@ -8,8 +8,9 @@
 
 import Foundation
 import SwiftyJSON
+import ObjectMapper
 
-public class Movie: Hashable {
+public class Movie: Hashable, Mappable {
     public var hashValue: Int {
         return ObjectIdentifier(self).hashValue
     }
@@ -18,12 +19,12 @@ public class Movie: Hashable {
         return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
     }
   
-    var id: Int
-    var title: String
+    var id: Int?
+    var title: String?
     var releaseDate: Date?
-    var posterPath: String
-    var rating: Float
-    var overview: String
+    var posterPath: String?
+    var rating: Float?
+    var overview: String?
     
     var budget: Int?
     var genres: String?
@@ -47,6 +48,18 @@ public class Movie: Hashable {
         self.posterPath = posterPath
         self.rating = rating
         self.overview = overview
+    }
+    
+    public required init?(map: Map) {
+    }
+    
+    public func mapping(map: Map) {
+        id <- map["id"]
+        title <- map["title"]
+        releaseDate <- map["release_date"]
+        posterPath <- map["poster_path"]
+        rating <- map["vote_average"]
+        overview <- map["overview"]
     }
     
     convenience init(_ json: JSON) {

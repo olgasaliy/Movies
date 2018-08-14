@@ -61,7 +61,7 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "movieListCell", for: indexPath) as! MovieListCell
         let movie = moviesArray[indexPath.row]
-        cell.configureCell(image: movies[movie] ?? #imageLiteral(resourceName: "not-available"), title: movie.title)
+        cell.configureCell(image: movies[movie] ?? #imageLiteral(resourceName: "not-available"), title: movie.title!)
         return cell
     }
     

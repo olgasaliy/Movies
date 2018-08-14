@@ -21,7 +21,7 @@ public class MovieManager {
     let service = DataStore.shared.dataService
     
     func getMovieDetails(for movie: Movie, completionHandler: @escaping (Movie, Error?) -> Void) {
-        service.getMovieDetails(by: movie.id) { data, error in
+        service.getMovieDetails(by: movie.id!) { data, error in
             if error != nil {
                 completionHandler(movie, error)
             } else {
@@ -38,7 +38,7 @@ public class MovieManager {
     }
     
     func getPoster(for movie: Movie, size: posterSize, completionHandler: @escaping (UIImage?, Error?) -> Void) {
-        service.getMoviePoster(by: movie.posterPath, size: size) { image, error in
+        service.getMoviePoster(by: movie.posterPath!, size: size) { image, error in
             completionHandler(image, error)
         }
     }

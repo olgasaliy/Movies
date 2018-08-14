@@ -6,7 +6,7 @@
 //  Copyright © 2018 Olha Salii. All rights reserved.
 //
 
-import CoreData
+/*import CoreData
 
 extension CoreDataMovie {
     
@@ -29,4 +29,4 @@ extension CoreDataMovie {
         //TODO: Save image to disk and return its path
         return ""
     }
-}
+}*/

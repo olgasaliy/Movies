@@ -27,9 +27,9 @@ class MovieDetailCell: UITableViewCell {
         }
     }
     
-    func configure(with image: UIImage, description: String, title: String, liked: Bool) {
+    func configure(with image: UIImage, description: String?, title: String?, liked: Bool) {
         self.titleLabel.text = title
-        self.descriptionLabel.text = description
+        self.descriptionLabel.text = description ?? "Unknown genre"
         self.posterImageView.image = image
         self.isLiked = liked
     }
