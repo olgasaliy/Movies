@@ -32,6 +32,7 @@
 		CC3063222122CAB300A27F17 /* ApiRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3063212122CAB200A27F17 /* ApiRouterProtocol.swift */; };
 		CC3063242122CD9200A27F17 /* MoviesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3063232122CD9200A27F17 /* MoviesRouter.swift */; };
 		CC3063262122DF4B00A27F17 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3063252122DF4B00A27F17 /* DataProvider.swift */; };
+		CCB077102125769D005FF400 /* MoviesDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB0770F2125769D005FF400 /* MoviesDataProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 		CC3063212122CAB200A27F17 /* ApiRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRouterProtocol.swift; sourceTree = "<group>"; };
 		CC3063232122CD9200A27F17 /* MoviesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesRouter.swift; sourceTree = "<group>"; };
 		CC3063252122DF4B00A27F17 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
+		CCB0770F2125769D005FF400 /* MoviesDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesDataProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -292,6 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				CC3063252122DF4B00A27F17 /* DataProvider.swift */,
+				CCB0770F2125769D005FF400 /* MoviesDataProvider.swift */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 				CC1A9CE620B6097A00E261AB /* MovieDetailViewController.swift in Sources */,
 				4982279A20ADC1CF0035BD3A /* DataService.swift in Sources */,
 				CC3063262122DF4B00A27F17 /* DataProvider.swift in Sources */,
+				CCB077102125769D005FF400 /* MoviesDataProvider.swift in Sources */,
 				4982277820ADA6CB0035BD3A /* Movies.xcdatamodeld in Sources */,
 				CC1A9CEC20B6C34100E261AB /* LoadingCell.swift in Sources */,
 				4982279820ADB6430035BD3A /* String+Additions.swift in Sources */,
